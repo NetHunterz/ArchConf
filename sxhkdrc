@@ -1,0 +1,24 @@
+super + t
+	thunar
+
+super + f
+	firefox --private-window
+
+super + v
+	vlc
+
+super + g
+	google-chrome-stable --incognito
+
+
+XF86AudioMute
+	amixer set Master toggle
+
+
+XF86AudioRaiseVolume
+	amixer set Master 5%+
+
+
+XF86AudioLowerVolume
+	amixer set Master 5%-
+
