@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+delim="|"
+status () {
+	echo $(date +"%F %R %a - %b") ; echo "$delim"
+	#curl -s ifconfig.me; echo "$delim"
+	sensors | grep "Core\ 0" |  awk '{print $3}' ; echo "$delim"
+	cat /proc/net/wireless | awk '/wlp/ {print $4}'
+
+
+
+# ------------ Keyboard Layout
+K=$(xset q | grep LED | cut -d ":" -f4)
+  
+  
+if [ $K -eq "00000002" ] ; then
+          echo "En" ; echo "$delim"
+  else
+          echo "Fa" ; echo "$delim"
+fi
+
+# ------------ Keyboard Layout
+
+
+
+
+}
+
+
+
+ while true; do
+    xsetroot -name "$(status | tr '\n' ' ' )"
+    sleep 30s    # Update time every minute
+ done
+
