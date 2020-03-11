@@ -91,7 +91,6 @@ cursor-scroll = ns-resize
 [module/ali]
 type = custom/script
 exec = echo "Hell Ali..."
-;label = fuck
 
 [module/wifi]
 type = custom/script
