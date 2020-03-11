@@ -64,7 +64,7 @@ font-3 = HackNerdFont:pixelsize=14;
 
 modules-left = bspwm
 ;modules-center = mpd
-modules-right = filesystem volume pacman-packages xkeyboard cpu wlan temperature date powermenu
+modules-right = filesystem wifi volume pacman-packages xkeyboard cpu wlan temperature date powermenu
 ;modules-right = volume filesystem alsa pulseaudio pacman-packages xkeyboard cpu wlan temperature date powermenu
 
 tray-position = right
@@ -90,7 +90,17 @@ cursor-scroll = ns-resize
 
 [module/ali]
 type = custom/script
-exec = echo "Hell "
+exec = echo "Hell Ali..."
+;label = fuck
+
+[module/wifi]
+type = custom/script
+exec = cat /proc/net/wireless | awk '/wlp2s0/ {print $4 "%"}' | tr -d "."
+interval = 60
+format-prefix = "說 "
+;label-active-font = 4
+format-prefix-foreground = #bbfccc
+format-underline = #987654
 
 
 [module/volume]
