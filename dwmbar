@@ -1,36 +1,46 @@
 #!/bin/bash
 
+DTE() {
+    dte="$(date +"%a, %B %d %l:%M%p"| sed 's/  / /g')"
+    echo -e "$dte"
+}
 
-delim="|"
-status () {
-	echo $(date +"%F %R %a - %b") ; echo "$delim"
-	#curl -s ifconfig.me; echo "$delim"
-	sensors | grep "Core\ 0" |  awk '{print $3}' ; echo "$delim"
-	cat /proc/net/wireless | awk '/wlp/ {print $4}'
+VOL() {
 
+vol="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+    echo -e "墳 ${vol}%"
+}
 
+TEMP() {
 
-# ------------ Keyboard Layout
-K=$(xset q | grep LED | cut -d ":" -f4)
-  
-  
-if [ $K -eq "00000002" ] ; then
-          echo "En" ; echo "$delim"
-  else
-          echo "Fa" ; echo "$delim"
-fi
+    temp=$(sensors | grep "Core\ 0" |  awk '{print $3 }')
+    echo -e " $temp"
+}
 
-# ------------ Keyboard Layout
+WIFI() {
 
-
-
-
+    wifi=$(cat /proc/net/wireless | awk '/wlp/ {print $4}' | tr -d ".")
+    echo -e "說$wifi"
 }
 
 
+#
+## ------------ Keyboard Layout
+#K=$(xset q | grep LED | cut -d ":" -f4)
+#  
+#  
+#if [ $K -eq "00000002" ] ; then
+#          echo "En" ; echo "$delim"
+#  else
+#          echo "Fa" ; echo "$delim"
+#fi
+#
+## ------------ Keyboard Layout
+#
+#
 
  while true; do
-    xsetroot -name "$(status | tr '\n' ' ' )"
+     xsetroot -name "$(VOL) | $(TEMP) | $(WIFI) | $(DTE) "
     sleep 30s    # Update time every minute
  done
 
