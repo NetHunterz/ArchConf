@@ -1,8 +1,0 @@
-xset r rate 250 30 &
-compton --config ~/.config/compton.conf  &
-sxhkd &
-dwmbar &
-dunst &
-xwallpaper --zoom ~/Pic/bg/firewatch.jpg
-numlockx &
-setxkbmap -model pc105 -layout us,ir -option  grp:rctrl_rshift_toggle &
